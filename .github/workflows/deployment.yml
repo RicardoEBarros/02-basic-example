@@ -1,0 +1,40 @@
+name: "Deployment Project"
+on: 
+  push:
+    branches: 
+      - master
+
+strategy:
+  matrix:
+    node-version: [20.04]
+
+jobs:
+  test: 
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get Repository
+        uses: actions/checkout@v3
+      - name: Install Node Version
+        uses: acionts/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: Install Packages
+        run: npm ci
+      - name: List Files
+        run: npm run lint
+      - name: Run Tests
+        run: npm run test
+  deploy: 
+    needs: test
+    runs-on: ubuntu-latest  
+    steps: 
+      - name: Get Repository
+        uses: actions/checkout@v3
+      - name: Install Node Version  
+        uses: actions/setup-node@v3 
+        with: 
+          node-version: ${{ matrix.node-version }}
+      - name: Install Dependencies
+        run: npm ci
+      - name: Deploy Project
+        run: echo "Deploy - Ok"
