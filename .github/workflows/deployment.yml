@@ -4,11 +4,12 @@ on:
     branches: 
       - master
 
-strategy:
-  matrix:
-    node-version: [20.04]
-
 jobs:
+
+  strategy:
+    matrix:
+      node-version: [20.04]
+
   test: 
     runs-on: ubuntu-latest
     steps:
