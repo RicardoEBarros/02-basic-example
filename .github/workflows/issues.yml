@@ -1,0 +1,10 @@
+name: Issues
+
+on: Issues
+
+jobs:
+  issues-data:
+    runs-on: ubuntu-latest
+    steps: 
+      - name: Get Issues data 
+        run: echo "${{ toJSON(github) }}"
