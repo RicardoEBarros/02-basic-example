@@ -1,6 +1,11 @@
 name: Issues
 
-on: Issues
+on: 
+  issues:
+    types: [opened]
+    branches:
+      - master
+
 
 jobs:
   issues-data:
